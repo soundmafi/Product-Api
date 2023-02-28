@@ -1,25 +1,26 @@
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
-import { prop } from '@typegoose/typegoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export interface TopPageModel extends Base {}
-
 export class HhData {
-  @prop()
+  @Prop()
   count: number;
-  @prop()
+
+  @Prop()
   juniorSalary: number;
 
-  @prop()
+  @Prop()
   middleSalary: number;
 
-  @prop()
+  @Prop()
   seniorSalary: number;
 }
 
 export class TopPageAdvantage {
-  @prop()
+  @Prop()
   title: string;
-  @prop()
+  @Prop()
   description: string;
 }
 export enum TopLevelCategory {
@@ -29,34 +30,38 @@ export enum TopLevelCategory {
   Products,
 }
 
+@Schema()
 export class TopPageModel extends TimeStamps {
-  @prop({ enum: TopLevelCategory })
+  @Prop({ enum: TopLevelCategory })
   firstLevelCategory: TopLevelCategory;
 
-  @prop()
+  @Prop()
   secondCategory: string;
 
-  @prop({ unique: true })
+  @Prop({ unique: true })
   alias: string;
 
-  @prop()
+  @Prop()
   title: string;
 
-  @prop()
+  @Prop()
   category: string;
 
-  @prop({ type: () => HhData })
+  @Prop({ type: () => HhData })
   hh?: HhData;
 
-  @prop({ type: () => [TopPageAdvantage] })
+  @Prop({ type: () => [TopPageAdvantage] })
   advantages: TopPageAdvantage[];
 
-  @prop()
+  @Prop()
   seoText: string;
 
-  @prop()
+  @Prop()
   tagsTitle: string;
 
-  @prop({ type: () => [String] })
+  @Prop({ type: () => [String] })
   tags: string[];
 }
+
+export const TopPageSchema = SchemaFactory.createForClass(TopPageModel);
+export type TopPageDocument = HydratedDocument<TopPageModel>;

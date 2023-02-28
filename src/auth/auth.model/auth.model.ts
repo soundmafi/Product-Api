@@ -1,13 +1,18 @@
-import { prop } from '@typegoose/typegoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses';
-export interface AuthModel extends Base {}
+import { HydratedDocument } from 'mongoose';
 
+export interface AuthModel extends Base {}
+@Schema()
 export class AuthModel extends TimeStamps {
-  @prop({
+  @Prop({
     unique: true,
   })
   email: string;
 
-  @prop()
+  @Prop()
   passwordHash: string;
 }
+
+export const AuthSchema = SchemaFactory.createForClass(AuthModel);
+export type AuthDocument = HydratedDocument<AuthModel>;

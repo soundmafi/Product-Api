@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthController } from './auth.controller';
-import { AuthModel } from './auth.model/auth.model';
+import { AuthSchema } from './auth.model/auth.model';
 
 @Module({
   controllers: [AuthController],
@@ -9,8 +9,7 @@ import { AuthModel } from './auth.model/auth.model';
     MongooseModule.forFeature([
       {
         name: 'Auth',
-        schema: AuthModel,
-        collection: 'Auth',
+        schema: AuthSchema,
       },
     ]),
   ],

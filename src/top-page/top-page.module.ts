@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TopPageController } from './top-page.controller';
-import { TopPageModel } from './top-page.model/top-page.model';
+import { TopPageSchema } from './top-page.model/top-page.model';
 
 @Module({
   controllers: [TopPageController],
@@ -9,8 +9,7 @@ import { TopPageModel } from './top-page.model/top-page.model';
     MongooseModule.forFeature([
       {
         name: 'TopPage',
-        schema: TopPageModel,
-        collection: 'TopPage',
+        schema: TopPageSchema,
       },
     ]),
   ],
