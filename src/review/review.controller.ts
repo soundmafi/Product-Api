@@ -42,7 +42,7 @@ export class ReviewController {
     @Param('productId') productId: string,
     @userEmail() email: string,
   ) {
-    console.log(email);
+    // console.log(email);
 
     return this.reviewService.findByProductId(productId);
   }

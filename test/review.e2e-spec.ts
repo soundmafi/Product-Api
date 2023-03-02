@@ -6,6 +6,7 @@ import { CreateReviewDto } from 'src/review/dto/create-review.dto';
 import { Types, disconnect } from 'mongoose';
 import { ReviewDocument } from 'src/review/review.model/review.model';
 import { REVIEW_NOT_FOUND } from '../src/review/review.constants';
+import { AuthDto } from 'src/auth/dto/auth.dto';
 const productId = new Types.ObjectId().toHexString();
 const testDto: CreateReviewDto = {
   name: 'Test',
@@ -15,9 +16,15 @@ const testDto: CreateReviewDto = {
   productId: productId,
 };
 
+const loginDTO: AuthDto = {
+  login: 's1@test.com',
+  password: '1',
+};
+
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let createdId: string;
+  let token: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -26,6 +33,11 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+
+    const { body } = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send(loginDTO);
+    token = body.access_token;
   });
 
   it('/review/create (POST) - success', async () => {
@@ -43,10 +55,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .post('/review/create')
       .send({ ...testDto, rating: 0 })
-      .expect(400)
-      .then(({ body }: request.Response) => {
-        console.log(body);
-      });
+      .expect(400);
   });
 
   it('/review/byProduct/:productId (GET) - success', async () => {
@@ -72,12 +81,14 @@ describe('AppController (e2e)', () => {
   it('/review/delete (DELETE) - success', () => {
     return request(app.getHttpServer())
       .delete('/review/' + createdId)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200);
   });
 
   it('/review/delete (DELETE) - fail', () => {
     return request(app.getHttpServer())
       .delete('/review/' + new Types.ObjectId().toHexString())
+      .set('Authorization', 'Bearer ' + token)
       .expect(404, {
         statusCode: 404,
         message: REVIEW_NOT_FOUND,
