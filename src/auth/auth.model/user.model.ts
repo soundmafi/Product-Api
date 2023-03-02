@@ -2,9 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses';
 import { HydratedDocument } from 'mongoose';
 
-export interface AuthModel extends Base {}
+export interface UserModel extends Base {}
 @Schema()
-export class AuthModel extends TimeStamps {
+export class UserModel extends TimeStamps {
   @Prop({
     unique: true,
   })
@@ -14,5 +14,5 @@ export class AuthModel extends TimeStamps {
   passwordHash: string;
 }
 
-export const AuthSchema = SchemaFactory.createForClass(AuthModel);
-export type AuthDocument = HydratedDocument<AuthModel>;
+export const UserSchema = SchemaFactory.createForClass(UserModel);
+export type AuthDocument = HydratedDocument<UserModel>;
