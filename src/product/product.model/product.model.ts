@@ -22,13 +22,13 @@ export class ProductModel extends TimeStamps {
   price: number;
 
   @Prop()
-  oldPrrice: number;
+  oldPrrice?: number;
 
   @Prop()
   credit: number;
 
-  @Prop()
-  calculateRating: number;
+  // @Prop()
+  // calculateRating: number;
 
   @Prop()
   description: string;
