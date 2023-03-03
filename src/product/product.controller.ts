@@ -11,7 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import path from 'path';
+import { IdValidationPipe } from 'src/pipes/id-validation.pipe';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
 import { PRODUCT_NOT_FOUND } from './product.constants';
@@ -26,7 +26,7 @@ export class ProductController {
   }
 
   @Get(':id')
-  async get(@Param('id') id: string) {
+  async get(@Param('id', IdValidationPipe) id: string) {
     const product = await this.productService.findById(id);
     if (!product) {
       throw new NotFoundException(PRODUCT_NOT_FOUND);

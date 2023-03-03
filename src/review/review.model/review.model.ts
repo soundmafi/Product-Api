@@ -1,6 +1,7 @@
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
+import { types } from '@typegoose/typegoose';
 
 export interface ReviewModel extends Base {}
 @Schema()
