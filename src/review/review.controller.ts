@@ -15,6 +15,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt.guards';
 import { userEmail } from '../decorators/user-email.decorator';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { REVIEW_NOT_FOUND } from './review.constants';
+import { ReviewDocument } from './review.model/review.model';
 import { ReviewService } from './review.service';
 
 @Controller('review')
@@ -36,14 +37,13 @@ export class ReviewController {
     }
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get('byProduct/:productId')
-  async getByProduct(
-    @Param('productId') productId: string,
-    @userEmail() email: string,
-  ) {
-    // console.log(email);
-
+  async getByProduct(@Param('productId') productId: string) {
     return this.reviewService.findByProductId(productId);
+  }
+
+  @Get('')
+  async findAllReviews(): Promise<ReviewDocument[] | null> {
+    return await this.reviewService.findAll();
   }
 }

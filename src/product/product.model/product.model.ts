@@ -27,9 +27,6 @@ export class ProductModel extends TimeStamps {
   @Prop()
   credit: number;
 
-  // @Prop()
-  // calculateRating: number;
-
   @Prop()
   description: string;
 

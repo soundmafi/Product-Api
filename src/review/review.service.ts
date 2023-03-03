@@ -26,4 +26,8 @@ export class ReviewService {
   async deleteByProductId(productId: string): Promise<any> {
     return this.reviewModel.deleteMany({ productId }).exec();
   }
+
+  async findAll(): Promise<ReviewDocument[] | null> {
+    return this.reviewModel.find().exec();
+  }
 }
