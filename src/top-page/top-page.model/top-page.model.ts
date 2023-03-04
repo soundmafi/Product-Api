@@ -1,6 +1,7 @@
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Index } from '@typegoose/typegoose';
 
 export interface TopPageModel extends Base {}
 export class HhData {
@@ -30,6 +31,7 @@ export enum TopLevelCategory {
   Products,
 }
 
+@Index({ '$**': 'text' })
 @Schema()
 export class TopPageModel extends TimeStamps {
   @Prop({ enum: TopLevelCategory })
@@ -41,7 +43,7 @@ export class TopPageModel extends TimeStamps {
   @Prop({ unique: true })
   alias: string;
 
-  @Prop()
+  @Prop({ text: true })
   title: string;
 
   @Prop()
