@@ -3,11 +3,13 @@ import {
   IsArray,
   IsEnum,
   IsNumber,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { TopLevelCategory } from '../top-page.model/top-page.model';
 
-export class HhData {
+export class HhDataDto {
   @IsNumber()
   count: number;
 
@@ -24,19 +26,14 @@ export class HhData {
 export class TopPageAdvantageDto {
   @IsString()
   title: string;
+
   @IsString()
   description: string;
 }
-export enum TopLevelCategoryDto {
-  Courses,
-  Servises,
-  Books,
-  Products,
-}
 
-export class TopPageDto {
-  @IsEnum(TopLevelCategoryDto)
-  firstLevelCategory: TopLevelCategoryDto;
+export class CreateTopPageDto {
+  @IsEnum(TopLevelCategory)
+  firstLevelCategory: TopLevelCategory;
 
   @IsString()
   secondCategory: string;
@@ -50,8 +47,10 @@ export class TopPageDto {
   @IsString()
   category: string;
 
-  @IsString()
-  hh?: HhData;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => HhDataDto)
+  hh?: HhDataDto;
 
   @IsArray()
   @ValidateNested()
@@ -64,6 +63,7 @@ export class TopPageDto {
   @IsString()
   tagsTitle: string;
 
+  @IsArray()
   @IsString({ each: true })
   tags: string[];
 }

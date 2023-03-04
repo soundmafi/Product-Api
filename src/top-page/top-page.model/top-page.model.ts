@@ -33,7 +33,7 @@ export enum TopLevelCategory {
 @Schema()
 export class TopPageModel extends TimeStamps {
   @Prop({ enum: TopLevelCategory })
-  firstLevelCategory: TopLevelCategory;
+  firstCategory: TopLevelCategory;
 
   @Prop()
   secondCategory: string;
