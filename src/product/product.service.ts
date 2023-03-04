@@ -51,14 +51,13 @@ export class ProductService {
           $limit: dto.limit,
         },
 
-        // { $sort: { _id: 1 } },
+        { $sort: { _id: 1 } },
 
         {
           $lookup: {
             from: 'reviews',
             localField: '_id',
             foreignField: 'productId',
-
             as: 'customReviews',
           },
         },
