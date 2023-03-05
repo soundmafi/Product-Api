@@ -10,8 +10,6 @@ import { ID_VALIDATION_ERROR } from './id-validation.constants';
 @Injectable()
 export class IdValidationPipe implements PipeTransform {
   transform(value: string, metadata: ArgumentMetadata) {
-    console.log(metadata.type);
-
     if (metadata.type !== 'param') {
       return value;
     }

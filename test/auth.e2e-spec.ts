@@ -12,8 +12,6 @@ const loginDTO: AuthDto = {
 
 describe('AuthController (e2e)', () => {
   let app: INestApplication;
-  let createdId: string;
-  let token: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
