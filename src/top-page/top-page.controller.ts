@@ -12,7 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { isValidObjectId } from 'mongoose';
-import { IdValidationPipe } from 'src/pipes/id-validation.pipe';
+import { IdValidationPipe } from '../pipes/id-validation.pipe';
 import { CreateTopPageDto } from './dto/create.top-page.dto';
 import { FindTopPageDto } from './dto/find-top-page.dto';
 import { TOP_PAGE_NOT_FOUND } from './top-page.constants';

@@ -3,6 +3,7 @@
 /node_modules
 .env
 /mongo-data-4.4
+test-report.html
 
 # Logs
 logs
