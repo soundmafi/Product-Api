@@ -2,7 +2,7 @@
 Simple backend project on NestJs with Mongo Db.
   <ul>Realized:
      <li> auth / product/ review / top-pages  modules</li>
-     <li> simle JWT authorization </li>
+     <li> simple JWT authorization </li>
      <li> validation data</li>
      <li> mongo database</li>
      <li> api covered by tests</li>
